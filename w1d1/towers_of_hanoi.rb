@@ -24,16 +24,6 @@ def game
       puts "Where do you want to move the disk from? Say 1, 2, or 3"
       pole_from = gets.chomp
       moving_disk = poles[pole_from].pop if %w(1 2 3).include?(pole_from)
-    #   case pole_from
-    #   when "1"
-    #     moving_disk = pole_one.pop
-    #   when "2"
-    #     moving_disk = pole_two.pop
-    #   when "3"
-    #     moving_disk = pole_three.pop
-    #   else
-    #     puts "Invalid selection"
-    #   end
     end
 
     status(poles["1"], poles["2"], poles["3"])
