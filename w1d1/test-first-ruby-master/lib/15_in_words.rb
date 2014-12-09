@@ -21,7 +21,6 @@ class Fixnum
     when 100..999
       remain = (self % 100 != 0) ? " " + (self % 100).in_words : ""
       return ones[self / 100] + " hundred" + remain
-    # else
     when 1_000..999_999
       self.digits_to_words(1_000, "thousand")
     when 1_000_000..999_999_999
