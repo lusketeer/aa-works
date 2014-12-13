@@ -1,8 +1,6 @@
-
 class ComputerPlayer
   attr_reader :word, :last_guess
-  attr_accessor :other_player_guesses, :word_length
-  attr_accessor :dictionary, :other_user_response, :my_guesses
+  attr_accessor :other_player_guesses, :word_length, :dictionary
 
   def initialize
     @word
@@ -10,21 +8,13 @@ class ComputerPlayer
     @last_guess = ''
     @my_guesses = []
     @dictionary = File.readlines('dictionary.txt').map(&:chomp)
-    @other_user_response = ''
   end
 
   #methods for when I am the guesser
 
-  def play(other_player)
-    receive_secret_length unless word_length
-    guess
-    handle_guess_response
-    won?
-  end
-
   def receive_secret_length
     puts "How long is your word?"
-    self.word_length = gets.chomp.to_i
+    word_length = gets.chomp.to_i
     dictionary.select! { |dictionary_word| dictionary_word.length == word_length }
     nil
   end
@@ -32,17 +22,20 @@ class ComputerPlayer
   def guess
     letters = "E,T,A,O,I,N,S,R,H,L,D,C,U,M,F,P,G,W,Y,B,V,K,X,J,Q,Z".split(",").map(&:downcase)
     @last_guess = letters[my_guesses.size]
-    my_guesses << last_guess
-    puts "Is #{last_guess} in your word? Type your word status with underscores for all other letters."
-    self.other_user_response = gets.chomp
+    last_guess
+
+    puts "Is #{last_guess} in your word? type your word status with underscores for"
+    response = gets.chomp
+
   end
 
-  def handle_guess_response
+  def handle_guess_response(status) #J__J__
     dictionary.select! do |word|
-      other_user_response.gsub!("_", ".")
-      word =~ /#{other_user_response}/
+      status.gsub!("_", )
+      word =~ /#{status}/
     end
-    p "Words left: #{dictionary.size}"
+    # puts "Words left: #{dictionary.size}"
+    nil
   end
 
   def won?
@@ -56,21 +49,11 @@ class ComputerPlayer
     word
   end
 
-  def tell_secret_length
-    word.length
-  end
 
-  def print_status
-
-  end
-
-  def win_message
-    "Your word is #{dictionary.first}. I win!"
-  end
 
   def check_guess(guess)
-    other_player_guesses[guess] = word.include?(guess)
-    word.include?(guess)
+    @other_player_guesses[last_guess] = word.include?(guess)
+    nil
   end
 
   def status
@@ -85,4 +68,7 @@ class ComputerPlayer
     status
   end
 
+  def win_message
+    "Your word is #{dictionary.first}. I win!"
+  end
 end

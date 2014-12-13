@@ -128,22 +128,23 @@ end
 
 require "benchmark"
 def test_speed(num)
-  # time1 = Benchmark.measure do
-  #   make_fuckin_change(num)
-  # end
-  # puts "Make fucking change:"
-  # puts time1
-
   time2 = Benchmark.measure do
     make_change(num)
   end
   puts "Make Change: "
   puts time2
+  # 
   # time3 = Benchmark.measure do
   #   make_change_cheating(num)
   # end
   # puts "Burtal Force! "
   # puts time3
+  #
+  # time1 = Benchmark.measure do
+  #   make_fuckin_change(num)
+  # end
+  # puts "Make fucking change:"
+  # puts time1
 end
 
 
@@ -196,15 +197,15 @@ def subsets_rec(arr)
   result
 end
 
-def test_speed(num)
-  time1 = Benchmark.measure do
-    subsets(num)
-  end
-  puts time1
-
-  time2 = Benchmark.measure do
-    subsets_rec(num)
-  end
-  puts time2
-
-end
+# def test_speed(num)
+#   time1 = Benchmark.measure do
+#     subsets(num)
+#   end
+#   puts time1
+#
+#   time2 = Benchmark.measure do
+#     subsets_rec(num)
+#   end
+#   puts time2
+#
+# end

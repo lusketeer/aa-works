@@ -1,6 +1,7 @@
-class HumanPlayer
+require "./player.rb"
+class HumanPlayer < Player
 
-  attr_reader :word, :last_guess, :other_player
+  attr_reader :word, :last_guess
   attr_accessor :other_player_guesses, :word_length
 
   def initialize
@@ -8,18 +9,8 @@ class HumanPlayer
     @other_player_guesses = {}
     @last_guess = ''
   end
+  def check_guess(guess)
 
-  def play(other_player)
-
-    @other_player = other_player if !!other_player
-    receive_secret_length unless word_length
-    other_player.check_guess(guess)
-    puts other_player.status
-    won?
-  end
-
-  def receive_secret_length
-    self.word_length = other_player.tell_secret_length
   end
 
   def guess
@@ -28,12 +19,28 @@ class HumanPlayer
     last_guess
   end
 
-  def won?
-    other_player.status == other_player.word
+
+  def handle_guess_response(guess_check)
+    "I"
   end
 
-  def win_message
-    "You win!"
+
+
+  def check_guess(guess)
+    @other_player_guesses[last_guess] = word.include?(guess)
+    nil
+  end
+
+  def status
+    status = ""
+    word.each_char do |c|
+      if other_player_guesses[c]
+        status << c
+      else
+        status << "_"
+      end
+    end
+    status
   end
 
 end
