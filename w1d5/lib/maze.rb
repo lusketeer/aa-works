@@ -8,8 +8,8 @@ class MazeSolver
 
   attr_reader :start, :exit, :maze, :tree
   attr_accessor :visited_positions
-  WALL = '█'
-  PATH = "•"
+  WALL = '*'
+  PATH = "o"
 
   def initialize(maze_file_name)
     @maze = File.readlines(maze_file_name).map do |line|

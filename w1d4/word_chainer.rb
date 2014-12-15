@@ -1,45 +1,73 @@
+require_relative "poly_tree_node.rb"
+
 class WordChainer
   attr_accessor :dictionary, :filtered
   def initialize(dictionary_file_name)
     require 'set'
     @dictionary = Set.new.merge(File.readlines("dictionary.txt").map(&:chomp))
-    @filtered = false
+    @filtered = @dictionary
   end
 
   def set_word_size(size)
-    self.dictionary = self.dictionary.select { |el| el.length == size }
-    filtered = true
+    @filtered = filtered.select { |el| el.length == size }
   end
 
   def adjacent_words(word)
-    set_word_size(word.size) unless filtered
     reg_collection = []
     word.size.times do |i|
       temp = word.dup
       temp[i] = "."
       reg_collection << temp
     end
-    dictionary.select do |dict_word|
+    filtered.select do |dict_word|
       reg_collection.any? { |reg| dict_word =~ /^#{reg}$/i && dict_word != word  }
     end
   end
 
-  def run(source, target)
-    @current_words = [source]
-    @all_seen_words = [source]
-    until @current_words.empty?
-      new_current_words = []
-      @current_words.each do |current_word|
-        adjacent_words(current_word).each do |adjacent_word|
-          unless @all_seen_words.include?(adjacent_word)
-            new_current_words << adjacent_word
-            @all_seen_words << adjacent_word
-          end
+
+  def build_chains(source)
+    root = PolyTreeNode.new(source)
+    q = [root]
+    all_seen_words = [source]
+    filtered_dictionary = filtered
+    until q.empty?
+      node = q.shift
+      adjacent_words(node.value).each do |adjacent_word|
+        unless all_seen_words.include?(adjacent_word)
+          all_seen_words << adjacent_word
+          child_node = PolyTreeNode.new(adjacent_word)
+          child_node.parent = node
+          q << child_node
         end
       end
-      p new_current_words
-      @current_words = new_current_words
     end
+
+    root
+  end
+
+  def run(source, target)
+    set_word_size(target.size)
+    root = build_chains(source)
+    target_node = root.bfs(target)
+    target_node.trace_path_back
   end
 
 end
+
+wc = WordChainer.new("dictionary.txt")
+# p wc.run("duck", "ruby")
+wc.set_word_size(4)
+p wc.build_chains("duck")
+# p "duck"
+# temp_duck = wc.adjacent_words("duck")
+# p temp_duck
+# p temp_duck.first
+# temp_duck = wc.adjacent_words(temp_duck.first)
+# p temp_duck
+# p temp_duck.first
+# temp_duck = wc.adjacent_words(temp_duck.first)
+# p temp_duck
+# p temp_duck.first
+# temp_duck = wc.adjacent_words(temp_duck.first)
+# p temp_duck
+# p temp_duck.first
