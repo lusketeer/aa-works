@@ -55,7 +55,9 @@ class Tile
   end
 
   def flag
-    @cover = flagged? ? "*" : "F"
+    if ["*", "F"].include?(cover)
+      @cover = flagged? ? "*" : "F"
+    end
   end
 
   def neighbor_bomb_count
@@ -82,11 +84,10 @@ class Board
   def play
     puts "Welcome to minesweeper!! Have fun stepping on mines!"
     until won?
-      # render_board(:value)
-      # puts "========================="
       system("clear")
+      puts "Bomb Remain: #{bomb_seed - flagged_tiles_count}"
       render_board(:cover)
-      # option = STDIN.getc #get_option
+      puts "To move, use (U, H, J K). Esc to quit. \nSave (s), Flag (f), Reveal (r), Load (l). "
       begin
         system("stty raw -echo")
         option = STDIN.getc
@@ -94,14 +95,16 @@ class Board
         system("stty -raw echo")
       end
       case option
-      when "w"
+      when "u"
         @cursor[0] -= 1 if @cursor[0] > 0
-      when "s"
+      when "j"
         @cursor[0] += 1 if @cursor[0] < 8
-      when "a"
+      when "h"
         @cursor[1] -= 1 if @cursor[1] > 0
-      when "d"
+      when "k"
         @cursor[1] += 1 if @cursor[1] < 8
+      when "\e"
+        break
       when "f"
         pos = @cursor #get_pos
         self[pos].flag
@@ -113,23 +116,16 @@ class Board
           render_board(:cover, true)
           break
         end
-      when "g"
+      when "s"
         save_game
       when "l"
         load_game
       end
-      # p "Flagged Count"
-      # p flagged_tiles_count
-      # p "Revealed Count"
-      # p revealed_tiles_count
-      # p bomb_seed
-      # p won?
     end
     if won?
       puts "You won!"
     else
-      puts "You died!"
-      puts "Game over"
+      puts "You died! Game over!"
     end
   end
 
@@ -151,17 +147,21 @@ class Board
   end
 
   def save_game
-    puts "Give it a name: "
-    filename = gets.chomp.downcase
-    File.open("#{filename}.yml", "w") do |f|
+    # puts "Give it a name: "
+    # filename = gets.chomp.downcase
+    # File.open("#{filename}.yml", "w") do |f|
+    #   f.puts self.to_yaml
+    # end
+    File.open("auto_save.yml", "w") do |f|
       f.puts self.to_yaml
     end
   end
 
   def load_game
-    puts "Input filename: "
-    filename = gets.chomp.downcase
-    new_game = YAML::load_file("#{filename}.yml")
+    # puts "Input filename: "
+    # filename = gets.chomp.downcase
+    # new_game = YAML::load_file("#{filename}.yml")
+    new_game = YAML::load_file("auto_save.yml")
     new_game.play
   end
 
@@ -182,6 +182,12 @@ class Board
   end
 
   def render_board(choice, lost = false)
+    print "   "
+    (0...tiles.size).each do |i|
+      print i.to_s + " "
+    end
+    puts
+
     tiles.each_with_index do |row, row_index|
       print "#{row_index}: "
       row.each_with_index do |col, col_index|
@@ -191,7 +197,8 @@ class Board
         col_cover_temp = col.cover.to_s
         case col_cover_temp
         when "B"
-          output_cover = col_cover_temp.white.colorize(:blink)
+          output_cover = col_cover_temp.white
+          output_cover = col_cover_temp.white.on_red
         when "*"
           output_cover = col_cover_temp
         when "_"
@@ -199,24 +206,24 @@ class Board
         when "F"
           output_cover = col_cover_temp.light_yellow
         when "1"
-          output_cover = col_cover_temp.blue
+          output_cover = col_cover_temp.light_blue
         when "2"
-          output_cover = col_cover_temp.green
+          output_cover = col_cover_temp.light_green
         when "3"
-          output_cover = col_cover_temp.red
+          output_cover = col_cover_temp.light_red
         when "4"
           output_cover = col_cover_temp.white
         when "5"
-          output_cover = col_cover_temp.magenta
+          output_cover = col_cover_temp.light_magenta
         when "6"
-          output_cover = col_cover_temp.cyan
+          output_cover = col_cover_temp.light_cyan
         when "7"
           output_cover = col_cover_temp.light_blue
         when "8"
           output_cover = col_cover_temp.yellow
         end
         if @cursor == [row_index, col_index]
-          print output_cover.on_white
+          print output_cover.black.on_white
         else
           print (choice == :value) ? output_value :  output_cover
         end
@@ -248,11 +255,3 @@ end
 
 board = Board.new
 board.play
-# board.render_board(:value)
-# first_tile = board[[0, 0]]
-# first_tile.reveal
-# board.render_board(:cover)
-# p "Flagged Count"
-# p board.flagged_tiles_count
-# p "Revealed Count"
-# p board.revealed_tiles_count
