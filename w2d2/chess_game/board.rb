@@ -1,4 +1,5 @@
 require_relative "chess_collection.rb"
+require_relative "error_collection.rb"
 require "colorize"
 class Board
   include MyLib
@@ -9,16 +10,18 @@ class Board
     @selected_piece = nil
   end
 
-  def play
-    build_board
-  end
-
   def dup
     dup_board = Board.new
-    dup_board.board = self.board.map do |row|
-      row.map do |col|
-        col.board = dup_board unless col.nil?
-        col
+    (0..7).each do |row_index|
+      (0..7).each do |col_index|
+        position = [row_index, col_index]
+        unless self[position].nil?
+          piece = self[position].dup
+          piece.board = dup_board
+        else
+          piece = nil
+        end
+        dup_board[position] = piece
       end
     end
     dup_board
@@ -29,7 +32,7 @@ class Board
     (0..7).each do |col|
       # populate pawns
       self[[1, col]] = Pawn.new(:filled, PIECE_SYMBOLS[:filled][:pawn], self, [1, col], :down)
-      self[[6, col]] = Pawn.new(:non_filled, PIECE_SYMBOLS[:non_filled][:pawn], self, [7, col], :up)
+      self[[6, col]] = Pawn.new(:non_filled, PIECE_SYMBOLS[:non_filled][:pawn], self, [6, col], :up)
 
       # populate rooks
       if [0, 7].include?(col)
@@ -71,6 +74,7 @@ class Board
 
   def []=(pos, val)
     r, c = pos
+    val.pos = pos unless val.nil?
     @board[r][c] = val
   end
 
@@ -92,7 +96,11 @@ class Board
           symbol = current_piece.symbol
         end
         if @cursor == [row, col]
-          print "#{(current_piece.nil?) ? ' '.on_white : symbol.on_white} "
+          if @selected_piece.nil?
+            print "#{(current_piece.nil?) ? ' '.on_white : symbol.black.on_white} "
+          else
+            print "#{@selected_piece.symbol.black.on_white} "
+          end
         else
           print "#{(current_piece.nil?) ? ' ' : symbol} "
         end
@@ -108,12 +116,17 @@ class Board
   end
 
   def play
+    build_board
     loop do
       system("clear")
+      puts "Cursor: #{@cursor} | Selected: #{@selected_piece.moves unless @selected_piece.nil?}"
       print_board
       begin
         system("stty raw -echo")
         option = STDIN.getc
+      # rescue InvalidMoveError => e
+      #   puts "Error: #{e.message}"
+      #   retry
       ensure
         system("stty -raw echo")
       end
@@ -141,19 +154,24 @@ class Board
     # end
   end
   def pick_up
+    @selected_piece = self[@cursor].dup
+    self[@cursor] = nil
   end
 
   def put_down
+    if @selected_piece.moves.include?(@cursor) # valid move
+      @selected_piece.pos = @cursor.dup
+      self[@cursor] = @selected_piece
+      @selected_piece = nil
+    # else
+    #   raise InvalidMoveError.new "Invalid move"
+    end
   end
 end
 
 b = Board.new
 b.play
-b.print_board
-king = b[[0,4]]
-knight = b[[0,1]]
-include MyLib
-b[[2,2]] = Pawn.new(:non_filled, PIECE_SYMBOLS[:non_filled][:pawn], b, [2,2], :up)
-b.print_board
-pawn = b[[1,1]]
-p pawn.moves
+# b.build_board
+#
+# pawn = b[[1, 1]]
+# p pawn.moves

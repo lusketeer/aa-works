@@ -1,36 +1,26 @@
 module MyLib
   def diag_offsets # Diagonal direction offsets (Bishop)
     [
-      [1, 1],
-      [-1, -1],
-      [1, -1],
-      [-1, 1],
+      [1, 1], [-1, -1],
+      [1, -1], [-1, 1]
     ]
   end
 
   def orth_offsets # Orthogonal direction offsets (Rook)
     [
-      [1, 0],
-      [0,  1],
-      [-1, 0],
-      [0,  1]
+      [1, 0], [0, 1],
+      [-1, 0], [0, 1]
     ]
   end
 
-  def all_offsets # All direction offsets (Queen)
+  def all_offsets # All direction offsets (Queen & King)
     diag_offsets + orth_offsets
   end
 
   def knights_moves
     [
-      [1, 2],
-      [-1, 2],
-      [1, -2],
-      [-1, -2],
-      [-2, 1],
-      [2, -1],
-      [-2, -1],
-      [2, 1]
+      [1, 2], [-1, 2], [1, -2], [-1, -2],
+      [-2, 1], [2, -1], [-2, -1], [2, 1]
     ]
   end
 

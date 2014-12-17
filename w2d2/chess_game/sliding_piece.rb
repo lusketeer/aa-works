@@ -28,6 +28,7 @@ class SlidingPiece < Piece
         end
       end
     end
+    move_offsets << self.pos
     filter_moves(move_offsets)
   end
 end
