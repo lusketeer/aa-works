@@ -1,6 +1,5 @@
 require_relative "piece.rb"
 class SteppingPiece < Piece
-
   def moves
     move_offsets = []
     move_dirs.map do |direction|

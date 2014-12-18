@@ -13,12 +13,6 @@ class Game
   end
 
   def play
-    # board.entire_color(:non_filled).each do |piece|
-    #   piece.moves.each do |move|
-    #     p piece
-    #     p move
-    #   end
-    # end
     until self.board.checkmate?(:non_filled) || self.board.checkmate?(:filled)
       break unless @whose_turn.play_turn(self) #returns false if user wants to quit
       @whose_turn = ([@player2, @player1] - [@whose_turn]).first
