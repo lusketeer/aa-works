@@ -119,11 +119,12 @@ class Board
 
   def print_board
     print "  "
-    ('a'..'h').each {|c| print "#{c} "}
+    ('a'..'h').each {|c| print " #{c}  "}
     puts
     (0..7).each do |row|
       print "#{8 - row} "
       (0..7).each do |col|
+        bg_color = (row + col).even? ? :on_light_white : :on_light_black
         current_piece = self[[row, col]]
         unless current_piece.nil?
           color = current_piece.color
@@ -131,18 +132,18 @@ class Board
         end
         if @cursor == [row, col]
           if @selected_piece.nil?
-            print "#{(current_piece.nil?) ? ' '.on_white : symbol.black.on_white} "
+            print (current_piece.nil?) ? '    '.on_light_blue : " #{symbol}  ".black.on_light_blue
           else
-            print "#{@selected_piece.symbol.black.on_white} "
+            print " #{@selected_piece.symbol}  ".black.on_white
           end
         else
-          print "#{(current_piece.nil?) ? ' ' : symbol} "
+          print (current_piece.nil?) ? '    '.send(bg_color) : " #{symbol}  ".send(bg_color)
         end
       end
       print "#{8 - row}\n"
     end
     print "  "
-    ('a'..'h').each {|c| print "#{c} "}
+    ('a'..'h').each {|c| print " #{c}  "}
     puts ""
   end
 
