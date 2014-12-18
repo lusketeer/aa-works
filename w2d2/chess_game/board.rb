@@ -119,7 +119,7 @@ class Board
 
   def print_board
     print "  "
-    ('a'..'h').each {|c| print " #{c}  "}
+    ('A'..'H').each {|c| print " #{c}  "}
     puts
     (0..7).each do |row|
       print "#{8 - row} "
@@ -140,7 +140,7 @@ class Board
           print (current_piece.nil?) ? '    '.send(bg_color) : " #{symbol}  ".send(bg_color)
         end
       end
-      print "#{8 - row}\n"
+      print " #{8 - row}\n"
     end
     print "  "
     ('a'..'h').each {|c| print " #{c}  "}
