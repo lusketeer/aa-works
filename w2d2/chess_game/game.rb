@@ -1,6 +1,6 @@
 require_relative "board.rb"
-require_relative "human_player.rb"
-require 'byebug'
+require_relative "players/human_player.rb"
+# require 'byebug'
 class Game
   attr_accessor :whose_turn
   attr_reader :board

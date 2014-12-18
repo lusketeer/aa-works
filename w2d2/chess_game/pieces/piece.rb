@@ -1,4 +1,4 @@
-require_relative "my_lib.rb"
+require_relative "../lib/my_lib.rb"
 class Piece
   attr_reader :color, :symbol
   attr_accessor :pos, :board

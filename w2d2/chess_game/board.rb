@@ -1,5 +1,5 @@
 require_relative "chess_collection.rb"
-require 'byebug'
+# require 'byebug'
 require_relative "error_collection.rb"
 require "colorize"
 class Board
