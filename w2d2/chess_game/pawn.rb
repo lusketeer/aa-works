@@ -1,11 +1,13 @@
 require_relative "piece.rb"
 class Pawn < Piece
-  attr_accessor :num_moves, :move_dirs, :move_direction
+  attr_accessor :first_move, :move_direction
+  attr_reader :move_dirs
 
   def initialize(color, symbol, board, pos, move_direction)
     super(color, symbol, board, pos)
-    @num_moves = 0
-    case move_direction
+    @first_move = true
+    @move_direction = move_direction
+    case @move_direction
     when :down
       @move_dirs =  [
         [1, -1],
@@ -23,18 +25,15 @@ class Pawn < Piece
 
   def dup
     duplicate = Pawn.new(@color, @symbol, @board, @pos, @move_direction)
-    duplicate.num_moves = @num_moves
-    duplicate.move_dirs = @move_dirs
+    duplicate.first_move = @first_move
+    duplicate.move_dirs = @move_dirs.dup
     duplicate
-  end
-
-  def move
   end
 
   def moves
     move_offsets = []
     move_dirs.each do |direction|
-      if num_moves == 0 && direction.last == 0 # First move for the pawn
+      if first_move && direction.last == 0 # First move for the pawn
         (1..2).each do |multi|
           end_pos = [self.pos.first + direction.first * multi, self.pos.last]
           if self.board[end_pos].nil? # add when it's empty
@@ -52,7 +51,7 @@ class Pawn < Piece
         end
       end
     end
-    # if num_moves == 0
+    # if first_move == 0
     #   move_dirs.map do |direction|
     #     if direction.last == 0 # only multiplies when going straight
     #       (1..2).each do |multiplier|
@@ -74,6 +73,7 @@ class Pawn < Piece
     #     end
     #   end
     # end
+    move_offsets << self.pos
     move_offsets
   end
 end

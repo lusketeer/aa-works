@@ -9,7 +9,7 @@ module MyLib
   def orth_offsets # Orthogonal direction offsets (Rook)
     [
       [1, 0], [0, 1],
-      [-1, 0], [0, 1]
+      [-1, 0], [0, -1]
     ]
   end
 
@@ -24,10 +24,8 @@ module MyLib
     ]
   end
 
-  def filter_moves(moves_arr)
-    moves_arr.select do |pair|
-      pair.all? {|coord| (0..7).cover? coord }
-    end
+  def valid_coord?(move)
+    move.all? { |coord| (0..7).cover?(coord) }
   end
 
   PIECE_SYMBOLS = {
