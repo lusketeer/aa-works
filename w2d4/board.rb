@@ -3,13 +3,14 @@ require "colorize"
 require_relative "piece.rb"
 class Board
   attr_reader :size
-  attr_accessor :grid, :cursor, :selected_piece
+  attr_accessor :grid, :cursor, :selected_piece, :seq_moves
   def initialize(size, fill_board = true)
     @size = size
     @grid = Array.new(size) {Array.new(size) }
     fill_starting_grid if fill_board
     @cursor = [0, 0]
     @selected_piece = nil
+    @seq_moves = []
   end
 
   def dup
@@ -55,6 +56,9 @@ class Board
           square = piece.nil? ? "   " : " #{piece.render} "
           square = @selected_piece.nil? ? square : " #{@selected_piece.render} "
           print square.black.on_light_blue
+        elsif @seq_moves.include?([row, col])
+          square = piece.nil? ? "   " : " #{piece.render} "
+          print square.magenta.on_light_green
         elsif !@selected_piece.nil? && @selected_piece.pos == [row, col]
           print " #{piece.render} ".magenta.on_light_green
         else

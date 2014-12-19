@@ -2,11 +2,9 @@ require_relative "player.rb"
 class HumanPlayer < Player
   SYMBOLS = { white: "○",  black: "●" }
   attr_reader :board
-  attr_accessor :seq_moves
 
   def initialize(name, color)
     super(name, color)
-    @seq_moves = []
   end
 
   def play_move(board)
@@ -16,7 +14,7 @@ class HumanPlayer < Player
       system("clear")
       board.render
       puts "#{name.capitalize}'s turn: #{SYMBOLS[color]}"
-      # puts "Piece on Hand: #{board.selected_piece.inspect}, Move Seq: #{seq_moves}"
+      puts "Piece on Hand: #{board.selected_piece.render unless board.selected_piece.nil?}, Move Seq: #{board.seq_moves}"
       # puts "Valid Moves: #{board.selected_piece.valid_moves unless board.selected_piece.nil?}"
       begin
         system("stty raw -echo")
@@ -40,7 +38,7 @@ class HumanPlayer < Player
         pick_up
       when "k"
         put_down
-        @seq_moves = [] # reset seq moves after a turn
+        board.seq_moves = [] # reset seq moves after a turn
       end
 
     end
@@ -52,7 +50,13 @@ class HumanPlayer < Player
       board.selected_piece = board[board.cursor]
       # board[board.cursor] = nil
     elsif board.empty?(board.cursor) && !board.selected_piece.nil?
-      seq_moves << board.cursor if board.selected_piece.pos != board.cursor # && (board.selected_piece.valid_moves.include?(board.cursor)) # don't add current position
+      if board.selected_piece.pos != board.cursor # && (board.selected_piece.valid_moves.include?(board.cursor)) # don't add current position
+        if board.seq_moves.include?(board.cursor)
+          board.seq_moves -= [board.cursor]
+        else
+          board.seq_moves << board.cursor
+        end
+      end
     end
   end
 
@@ -63,10 +67,10 @@ class HumanPlayer < Player
       else
         piece_pos = board.selected_piece.pos
         begin
-          board[piece_pos].perform_moves(seq_moves)
+          board[piece_pos].perform_moves(board.seq_moves)
           board.selected_piece = nil
           @my_turn = false
-          @seq_moves = []
+          board.seq_moves = []
         rescue => e
           puts e.message
           @my_turn = true
