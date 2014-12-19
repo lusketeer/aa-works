@@ -1,26 +1,42 @@
 require_relative "board.rb"
-require_relative "human_player.rb"
+require_relative "players/human_player.rb"
 require "byebug"
 class Game
   attr_reader :board, :players
+  attr_accessor :cur_player
   def initialize(player1, player2)
     @players = [player1, player2]
     @board = Board.new(10)
+    @cur_player = players.first
   end
 
   def play
-    cur_player = players.first
-    until won?
+    until game_over?
       break unless cur_player.play_move(board)
-      cur_player = (players - [cur_player]).first
+      @cur_player = (players - [cur_player]).first
     end
-    puts "Game over"
-    winner = (players - [cur_player]).first if board.pieces(cur_player.color).empty?
-    puts "#{winner.color.to_s.capitalize} wins"
+    if game_over?
+      puts "Game over"
+      puts "#{self.winner.name.capitalize} wins"
+    end
   end
 
-  def won?
-    players.map {|player| player.color }.any? { |color| board.pieces(color).empty? }
+  def game_over?
+    players.map { |player| player.color }.any? { |color| out_of_moves?(color) }
+  end
+
+  def out_of_moves?(color)
+    available_moves = []
+    unless board.pieces(color).empty?
+      board.pieces(color).each do |piece|
+        available_moves += piece.valid_moves
+      end
+    end
+    available_moves.empty?
+  end
+
+  def winner
+    out_of_moves?(cur_player.color) ? (players - [cur_player]).first : cur_player
   end
 end
 

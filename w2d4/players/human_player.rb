@@ -1,5 +1,6 @@
 require_relative "player.rb"
 class HumanPlayer < Player
+  SYMBOLS = { white: "○",  black: "●" }
   attr_reader :board
   attr_accessor :seq_moves
 
@@ -14,9 +15,9 @@ class HumanPlayer < Player
     while @my_turn
       system("clear")
       board.render
-      puts "#{color.to_s.capitalize}'s turn"
-      puts "Piece on Hand: #{board.selected_piece.inspect}, Move Seq: #{seq_moves}"
-      puts "Valid Moves: #{board.selected_piece.valid_moves unless board.selected_piece.nil?}"
+      puts "#{name.capitalize}'s turn: #{SYMBOLS[color]}"
+      # puts "Piece on Hand: #{board.selected_piece.inspect}, Move Seq: #{seq_moves}"
+      # puts "Valid Moves: #{board.selected_piece.valid_moves unless board.selected_piece.nil?}"
       begin
         system("stty raw -echo")
         option = STDIN.getc
@@ -68,6 +69,7 @@ class HumanPlayer < Player
           @seq_moves = []
         rescue => e
           puts e.message
+          @my_turn = true
           return
         end
       end

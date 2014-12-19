@@ -56,7 +56,7 @@ class Board
           square = @selected_piece.nil? ? square : " #{@selected_piece.render} "
           print square.black.on_light_blue
         elsif !@selected_piece.nil? && @selected_piece.pos == [row, col]
-          print " #{piece.render} ".red.on_light_green
+          print " #{piece.render} ".magenta.on_light_green
         else
           square = piece.nil? ? "   " : " #{piece.render} "
           print square.send(bg_color)
