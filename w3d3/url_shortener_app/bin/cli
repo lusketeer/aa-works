@@ -1,0 +1,30 @@
+puts "Input your email:"
+email = gets.chomp
+
+user = User.where(email: email).first_or_create
+
+puts "What do you want to do?"
+puts "0. Create shortened URL"
+puts "1. Visit shortened URL"
+choice = gets.chomp
+
+case choice
+when "0"
+  puts "Type in your long URL"
+  long_url = gets.chomp
+  puts "Select a Tag Topic: "
+  tags = TagTopic.tags
+  tags.each_with_index do |name, index|
+    puts "#{index + 1}. #{name}"
+  end
+  tag = TagTopic.find(gets.chomp)
+  url = ShortenedUrl.create_for_user_and_long_url!(user, long_url)
+  Tagging.create_tagging_with_url_and_tag(url, tag)
+  puts "Your shortened url is: #{url.short_url}"
+when "1"
+  puts "Type in the shortened URL"
+  short_url = gets.chomp
+  url = ShortenedUrl.find_by(short_url: short_url)
+  Launchy.open ( url.long_url )
+  Visit.record_visit!(user, url)
+end

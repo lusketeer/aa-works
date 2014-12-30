@@ -1,0 +1,30 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>
+        Visit Counts
+      </th>
+      <th>
+        Tag Topic
+      </th>
+      <th>
+        Link
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @urls.each do |url| %>
+    <tr>
+      <td>
+        <%= url.num_clicks%>
+      </td>
+      <td>
+        <%= url.tag_topics.pluck(:name).join(", ")%>
+      </td>
+      <td>
+        <%= link_to "Link", url.long_url.include?("http") ? url.long_url : "http://#{url.long_url}" %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+<table>
