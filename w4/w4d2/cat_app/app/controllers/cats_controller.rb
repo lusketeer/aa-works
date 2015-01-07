@@ -1,14 +1,8 @@
 class CatsController < ApplicationController
   def index
-    col = params[:ordered_by] || 'name'
-    order = params[:order] || ''
-    if order.empty?
-      order = "asc"
-    elsif order == "asc"
-      order = "desc"
-    else
-      order = "asc"
-    end
+    col = params[:order_by] || 'name'
+    order = params[:order] || 'asc'
+
     @cats = Cat.all.order( col => order)
     render  :index
   end

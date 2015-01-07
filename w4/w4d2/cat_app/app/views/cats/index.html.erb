@@ -3,9 +3,9 @@
   <thead>
     <tr>
       <th>Photo</th>
-      <th><%= link_to "Name", cats_path(ordered_by: :name, order: toggle_order(params[:ordered_by])), method: "get" %></th>
+      <th><%= link_to "Name", cats_path(order_by: :name, order: toggle_order), method: "get" %></th>
       <th>Birth Date</th>
-      <th><%= link_to "Age", cats_path(ordered_by: :birth_date, order: toggle_order(params[:ordered_by])), method: "get" %></th>
+      <th><%= link_to "Age", cats_path(order_by: :birth_date, order: toggle_order), method: "get" %></th>
       <th>Color</th>
       <th>Sex</th>
       <th>Description</th>

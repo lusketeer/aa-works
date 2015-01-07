@@ -5,6 +5,7 @@ class CreateCats < ActiveRecord::Migration
       t.string :color, null: false
       t.string :name, null: false
       t.string :sex, null: false
+      t.string :image_url, null: false
       t.text :description
 
       t.timestamps null: false
