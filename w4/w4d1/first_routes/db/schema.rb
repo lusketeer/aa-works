@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20150106014029) do
 
-  create_table "comments", force: true do |t|
+  create_table "comments", force: :cascade do |t|
     t.text     "content"
     t.integer  "commentable_id"
     t.string   "commentable_type"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20150106014029) do
     t.datetime "updated_at",       null: false
   end
 
-  create_table "contact_shares", force: true do |t|
+  create_table "contact_shares", force: :cascade do |t|
     t.integer  "user_id",                    null: false
     t.integer  "contact_id",                 null: false
     t.datetime "created_at",                 null: false
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20150106014029) do
   add_index "contact_shares", ["user_id", "contact_id"], name: "index_contact_shares_on_user_id_and_contact_id", unique: true
   add_index "contact_shares", ["user_id"], name: "index_contact_shares_on_user_id"
 
-  create_table "contacts", force: true do |t|
+  create_table "contacts", force: :cascade do |t|
     t.string  "name",                      null: false
     t.string  "email",                     null: false
     t.integer "user_id"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20150106014029) do
   add_index "contacts", ["email", "user_id"], name: "index_contacts_on_email_and_user_id", unique: true
   add_index "contacts", ["user_id"], name: "index_contacts_on_user_id"
 
-  create_table "groupings", force: true do |t|
+  create_table "groupings", force: :cascade do |t|
     t.integer "contact_id"
     t.integer "group_id"
   end
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20150106014029) do
   add_index "groupings", ["contact_id"], name: "index_groupings_on_contact_id"
   add_index "groupings", ["group_id"], name: "index_groupings_on_group_id"
 
-  create_table "groups", force: true do |t|
+  create_table "groups", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name",       null: false
     t.datetime "created_at", null: false
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20150106014029) do
   add_index "groups", ["user_id", "name"], name: "index_groups_on_user_id_and_name", unique: true
   add_index "groups", ["user_id"], name: "index_groups_on_user_id"
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "username",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
