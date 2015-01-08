@@ -1,0 +1,6 @@
+ user id | session_token  | ip | dev_type |
+|  1      |  kjalsdfja    |    |:
+| 1       |   dasfjhasfdk |    |     
+| 1       |    ksjdkfjask |    |
+
+UserToken.where('token = kjsadfkjsad').user
