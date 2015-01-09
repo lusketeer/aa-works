@@ -1,0 +1,27 @@
+<ol class="breadcrumb">
+  <li>
+    <%= link_to @album.band.name, @album.band %>
+  </li>
+  <li class="active">
+    <%= @album.name %>
+  </li>
+</ol>
+
+<p>
+  <strong>Album type:</strong>
+  <%= @album.album_type %>
+</p>
+<%= link_to 'Edit', edit_album_path(@album), class: "btn btn-primary" %>
+<%= link_to "Delete", @album, class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure?"} %>
+
+<div class="row">
+  <h5>Track List</h5>
+  <ul>
+    <% @tracks.each do |track| %>
+      <li>
+        <%= link_to track.name, track %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+<%= link_to "Add Track", new_album_track_path(@album), class: "btn btn-success" %>

@@ -1,0 +1,20 @@
+<div class="page-header">
+  <h1>All Bands</h1>
+</div>
+
+<div class="row">
+  <% @bands.each do |band| %>
+  <div class="col-sm-3 col-md-2">
+    <a href="<%= band_path(band) %>">
+    <div class="thumbnail">
+      <img src="http://placehold.it/150x150" alt="...">
+      <div class="caption">
+        <h3><%= band.name %></h3></p>
+      </div>
+    </div></a>
+  </div>
+  <% end %>
+</div>
+
+
+<%= link_to 'New Band', new_band_path, class: "btn btn-success" %>

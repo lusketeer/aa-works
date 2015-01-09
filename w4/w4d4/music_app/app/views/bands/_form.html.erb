@@ -1,0 +1,22 @@
+<% action = band.persisted? ? "edit" : "new" %>
+<% form_action = band.persisted? ? "/bands/#{band.id}" : "/bands" %>
+<% button_name = band.persisted? ? "Update Band" : "Create Band" %>
+
+<form action="<%= form_action %>" method="post" class="form form-horizontal">
+  <%= authenticity_input(form_authenticity_token) %>
+  <%= method_override(action) %>
+
+  <div class="form-group col-md-7">
+    <label for="band_name" class="col-md-3 control-label">Band Name</label>
+    <div class="col-md-4">
+      <input type="text" name="band[name]" value="<%= band.name %>" id="band_name" class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group col-md-7">
+    <div class="col-md-4 col-md-offset-3">
+      <input type="submit" value="<%= button_name %>" class="btn btn-default">
+    </div>
+  </div>
+
+</form>

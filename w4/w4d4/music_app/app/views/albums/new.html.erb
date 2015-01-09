@@ -1,0 +1,6 @@
+<h1>New Album</h1>
+<div class="row">
+  <%= render 'form', album: @album, bands: @bands %>
+</div>
+
+<%= link_to 'Back', @album.band, class: "row" %>

@@ -1,0 +1,25 @@
+<ol class="breadcrumb">
+  <li class="active">
+    <%= @band.name %>
+  </li>
+</ol>
+<p>
+  <strong>Name:</strong>
+  <%= @band.name %>
+</p>
+<%= link_to 'Edit', edit_band_path(@band), class: "btn btn-primary" %>
+<%= link_to "Delete", @band, class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure?" } %>
+<%= link_to 'Back to Bands', bands_path %>
+<div class="row">
+  <h5>Album List</h5>
+  <ul>
+    <% @albums.each do |album| %>
+    <li>
+      <%= link_to album.name, album %>
+    </li>
+    <% end %>
+  </ul>
+</div>
+
+
+<%= link_to "New Album", new_band_album_path(@band), class: "btn btn-success" %>

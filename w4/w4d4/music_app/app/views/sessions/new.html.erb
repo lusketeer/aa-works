@@ -1,0 +1,24 @@
+<h1>Login</h1>
+
+<form action='/session' method='post' class="form form-horizontal col-md-8" >
+  <%= authenticity_input(form_authenticity_token) %>
+  <div class="form-group">
+    <label for="session_email" class="form-label col-md-2">Email</label>
+    <div class="col-md-6">
+      <input type='text' name='session[email]' id="session_email" class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="session_password" class="form-label col-md-2">Password</label>
+    <div class="col-md-6">
+      <input type='password' name='session[password]' class="form-control" id="session_password" >
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-6 col-md-offset-2">
+      <input type='submit' value='Login' class="btn btn-default" >
+    </div>
+  </div>
+</form>

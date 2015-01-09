@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+  <h1>Welcome Hogwarts, <%= @user.email %></h1>
+  <p>
+    You have been accepted to Hogwarts, the School of Wizard and Witchcraft.
+  </p>
+  <p>
+    To accept this offer, please go to this link: <%= link_to "Activate", @activation_link, target: "_new" %>.
+  </p>
+  <p>Thank you, we are looking forward to hear back from you</p>
+</body>
+</html>

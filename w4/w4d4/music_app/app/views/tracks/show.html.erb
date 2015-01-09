@@ -1,0 +1,39 @@
+<ol class="breadcrumb">
+  <li>
+    <%= link_to @track.album_band_name, @track.band %>
+  </li>
+  <li>
+    <%= link_to @track.album_name, @track.album %>
+  </li>
+  <li class="active">
+    <%= @track.name %>
+  </li>
+</ol>
+
+<p>
+  <strong>Track type:</strong>
+  <%= @track.track_type %>
+</p>
+
+<p>
+  <strong>Lyrics:</strong>
+  <%= display_lyrics(@track.lyrics) %>
+</p>
+<%= link_to "Delete", @track, class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure?" } %>
+<%= link_to 'Edit', edit_track_path(@track), class: "btn btn-primary" %>
+
+<div class="row" id="note-form">
+  <h5>New Note</h5>
+  <%= render "notes/form", note: @note, track_id: @track.id %>
+</div>
+
+<div class="row">
+  <h5>Notes</h5>
+  <ul>
+    <% @notes.each do |note| %>
+      <li>
+        <%= render "notes/note", note: note %>
+      </li>
+    <% end %>
+  </ul>
+</div>

@@ -1,0 +1,11 @@
+<div class="note-container">
+  <span class="note-body"><%= note.author.email %></span>
+  <p>
+    <%= note.track_note %>
+  </p>
+  <% if note.author == current_user %>
+  <span class="note-actions">
+    <%= link_to "Delete", note, class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure? "} %>
+  </span>
+  <% end %>
+</div>
