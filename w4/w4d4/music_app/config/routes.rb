@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root to: "bands#index"
 
-  get "users/activate", to: "users#activate"
   resources :notes, only: [:create, :destroy]
   resources :tracks, except: [:new, :index]
   resources :albums, except: [:new, :index] do
@@ -10,6 +9,8 @@ Rails.application.routes.draw do
   resources :bands do
     resources :albums, only: :new
   end
-  resources :users
+  resources :users do
+    get "activate", on: :collection
+  end
   resource :session
 end
