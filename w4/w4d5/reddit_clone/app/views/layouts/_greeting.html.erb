@@ -1,0 +1,21 @@
+<% unless signed_in? %>
+<form action="/session" method="post" class="form-inline">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <div class="form-group">
+    <label class="sr-only" for="session_username">Username</label>
+    <input type="text" name='session[username]' class="form-control" id="session_username" placeholder="Username">
+  </div>
+  <div class="form-group">
+    <label class="sr-only" for="session_password">Password</label>
+    <input type="password" name='session[password]' class="form-control" id="session_password" placeholder="Password">
+  </div>
+  <button type="submit" class="btn btn-default">Sign in</button>
+  <%= link_to "Sign Up", new_user_url%>
+</form>
+<% else %>
+<div class="welcome">
+  <strong>Welcome <%= current_user.name %>!</strong>
+  <%= button_to "Log Out", session_url, class: "btn btn-default",  method: :delete %>
+</div>
+<% end %>

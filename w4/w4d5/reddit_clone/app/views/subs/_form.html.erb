@@ -1,0 +1,27 @@
+<% request_method = sub.persisted? ? 'patch' : 'post' %>
+<% action = sub.persisted? ? "/subs/#{sub.id}" : "/subs" %>
+<% submit_value = sub.persisted? ? 'Update sub!' : 'New sub!' %>
+
+<form action="<%= action %>" method="post" class="form-horizontal">
+  <input type="hidden" name="_method" value="<%= request_method %>">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <div class="form-group">
+    <label for="sub_title" class="col-md-2 control-label">Title</label>
+    <div class="col-md-6">
+      <input type="text" name="sub[title]" value="<%= sub.title %>" id="sub_title">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="sub_desciption" class="col-md-2 control-label">Description</label>
+    <div class="col-md-6">
+      <textarea class="form-control" name="sub[description]" id="sub_desciption" rows="5"><%= sub.description %></textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-6 col-md-offset-2">
+      <input type="submit" class="btn btn-default" value="<%= submit_value %>">
+    </div>
+  </div>
+</form>

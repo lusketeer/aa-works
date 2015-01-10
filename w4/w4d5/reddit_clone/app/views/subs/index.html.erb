@@ -1,0 +1,13 @@
+<h1>All Subs</h1>
+
+<%= link_to "New Sub", new_sub_path, class: "btn btn-primary" %>
+
+<div class="row">
+  <ul>
+    <% @subs.each do |sub| %>
+      <li>
+        <%= link_to sub.title, sub %>
+      </li>
+    <% end %>
+  </ul>
+</div>

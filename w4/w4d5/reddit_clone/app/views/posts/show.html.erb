@@ -1,0 +1,28 @@
+<ol class="breadcrumb">
+  <li>
+    <%= link_to "All Subs", subs_path %>
+  </li>
+  <li class="active">
+    <%= @post.title %>
+  </li>
+</ol>
+
+<h1>
+  <%= @post.title %>
+  <%= link_to "Edit", edit_post_path(@post), class: "btn btn-primary" %>
+</h1>
+
+<div class="row">
+  <%= image_tag(@post.url.html_safe, size: "250x200") unless @post.url.empty? %>
+  <%= @post.content %>
+  <ul>
+    <% @subs.each do |sub| %>
+      <li>
+        <%= link_to sub.title, sub %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="row">
+</div>

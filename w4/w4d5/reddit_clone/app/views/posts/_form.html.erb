@@ -1,0 +1,46 @@
+<% request_method = post.persisted? ? 'patch' : 'post' %>
+<% action = post.persisted? ? "/posts/#{post.id}" : "/posts" %>
+<% submit_value = post.persisted? ? 'Update post!' : 'New post!' %>
+
+<form action="<%= action %>" method="post" class="form-horizontal">
+  <input type="hidden" name="_method" value="<%= request_method %>">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <div class="form-group">
+    <label for="post_subs" class="col-md-2 control-label">Subs</label>
+    <% all_subs.each do |sub| %>
+      <label class="col-md-2">
+        <%= sub.title %>
+        <input type="checkbox" name="post[sub_ids][]" value="<%= sub.id %>" <%= "checked" if post.sub_ids.include?(sub.id) %>>
+      </label>
+    <% end %>
+    <input type="hidden" name="post[sub_ids][]" value="" >
+  </div>
+
+  <div class="form-group">
+    <label for="post_title" class="col-md-2 control-label">Title</label>
+    <div class="col-md-6">
+      <input type="text" name="post[title]" value="<%= post.title %>" id="post_title" required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="post_url" class="col-md-2 control-label">Url (Optional)</label>
+    <div class="col-md-6">
+      <input type="text" name="post[url]" value="<%= post.url %>" id="post_url">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="post_content" class="col-md-2 control-label">Content (Optional)</label>
+    <div class="col-md-6">
+      <textarea class="form-control" name="post[content]" id="post_content" rows="5"><%= post.content %></textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-6 col-md-offset-2">
+      <input type="submit" class="btn btn-default" value="<%= submit_value %>">
+    </div>
+  </div>
+</form>

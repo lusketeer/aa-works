@@ -1,0 +1,24 @@
+<ol class="breadcrumb">
+  <li class="active">
+    <%= link_to "All Subs", subs_path %>
+  </li>
+</ol>
+
+
+<h1>
+  <%= @sub.title %> | <small>Moderator : <%= @sub.moderator.name %></small>
+  <%= link_to "Edit", edit_sub_path(@sub), class: "btn btn-primary" %>
+</h1>
+<p>
+  <%= @sub.description %>
+</p>
+
+<div class="row">
+  <h4>Posts</h4>
+  <ul>
+    <% @posts.each do |post| %>
+      <li><%= link_to post.title, post %></li>
+    <% end %>
+  </ul>
+
+</div>
