@@ -1,0 +1,8 @@
+<h1>Sign In</h1>
+
+<form id="form_id" action="<%= session_path %>" method="post">
+  <%= authenticity_input %>
+  <input type="text" name="session[username]" value="" id="username">
+  <input type="password" name="session[password]" value="" id="password">
+  <input type="submit" value="Sign In">
+</form>

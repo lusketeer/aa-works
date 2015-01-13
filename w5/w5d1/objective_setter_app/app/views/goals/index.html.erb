@@ -1,0 +1,18 @@
+<h1>All Goals</h1>
+<h2>All public goals</h2>
+<% @goals.each do |goal| %>
+<p>
+  <%= link_to goal.title, goal %>
+</p>
+<% end %>
+
+<h2>All my goals</h2>
+<% @my_goals.each do |goal| %>
+<p>
+  <%= link_to goal.title, goal %> |
+  <%= goal.completed ? "completed" : "incomplete" %>
+  <%= button_to "complete", complete_goal_path(goal), method: :patch %>
+</p>
+<% end %>
+
+<%= link_to "Create New Goal", new_goal_path %>

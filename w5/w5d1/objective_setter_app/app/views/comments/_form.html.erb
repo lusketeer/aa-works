@@ -1,0 +1,7 @@
+<form id="form_id" action="<%= comments_path %>" method="post">
+  <%= authenticity_input %>
+  <input type="hidden" name="comment[commentable_id]" value="<%= object.id %>">
+  <input type="hidden" name="comment[commentable_type]" value="<%= object.class.to_s %>">
+  <textarea name="comment[body]" rows="8" cols="40"></textarea>
+  <input type="submit" value="Add Comment">
+</form>

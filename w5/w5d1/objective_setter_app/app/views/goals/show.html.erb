@@ -1,0 +1,12 @@
+<%= @goal.title %>
+<%= link_to "Edit", edit_goal_path(@goal) %>
+<ul>
+<% @comments.each do |comment| %>
+<li>
+  <%= comment.body %> |
+  <%= comment.commenter.username %>
+</li>
+<% end %>
+</ul>
+
+<%= render "comments/form", object: @goal %>

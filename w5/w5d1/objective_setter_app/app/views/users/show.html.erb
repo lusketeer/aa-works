@@ -1,0 +1,11 @@
+<%= current_user.username %>
+<ul>
+  <% @comments.each do |comment| %>
+  <li>
+    <%= comment.body %> |
+    <%= comment.commenter.username %>
+  </li>
+  <% end %>
+</ul>
+
+<%= render "comments/form", object: current_user %>

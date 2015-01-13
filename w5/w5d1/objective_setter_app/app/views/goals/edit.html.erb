@@ -1,0 +1,16 @@
+<h1>Edit Goal</h1>
+
+<form id="form_id" action="<%= goal_path(@goal) %>" method="post">
+  <%= authenticity_input %>
+  <input type="hidden" name="_method" value="patch">
+
+  <input type="text" name="goal[title]" value="<%= @goal.title %>" id="title">
+  <% Goal::GOAL_TYPES.each do |goal_type| %>
+  <label>
+    <%= goal_type %>
+    <input type="radio" name="goal[goal_type]" value="<%= goal_type %>" id="goal_type" <%= "checked=checked" if goal_type == @goal.goal_type %>>
+  </label>
+  <% end %>
+
+  <input type="submit" value="Update Goal">
+</form>
