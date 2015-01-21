@@ -1,0 +1,16 @@
+/* PHASE 7: Online */
+.online {
+  display:block;
+  top: -10px;
+  left: -10px;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: whitesmoke;
+  background-color: #5DFC0A;
+  position: absolute;
+  transform: rotate(-45deg) translateX(-25%);
+  padding: 5px 30px;
+  box-shadow: 1px 1px 0 0 #070;
+}

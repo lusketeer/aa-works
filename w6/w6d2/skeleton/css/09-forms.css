@@ -1,0 +1,22 @@
+/* PHASE 9: Forms */
+.form {
+  margin: 0 0 20px 0;
+}
+
+.form-thumb {
+  float: left;
+}
+
+.form-fieldset {
+  float: left;
+  margin-left: 20px;
+  padding: 19px;
+  width: 500px;
+  background: whitesmoke;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input {
+  
+}
