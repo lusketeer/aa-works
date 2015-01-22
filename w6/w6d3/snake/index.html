@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link rel="stylesheet" href="css/snake.css" media="screen" title="no title" charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <div id="snake">
+
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="js/snake.js"></script>
+    <script src="js/snake-view.js"></script>
+    <script>
+      var snake = new Snakes.Snake();
+      var board = new Snakes.Board(snake);
+      var $el = $("#snake");
+      var view = new Snakes.View($el, board);
+      view.render();
+    </script>
+  </body>
+</html>

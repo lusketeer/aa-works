@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="css/hanoi.css" media="screen" title="no title" charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div id="hanoi" class="clearfix">
+    </div>
+
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="js/hanoi-core.js"></script>
+    <script src="js/hanoi-view.js"></script>
+    <script>
+      var game = new Hanoi.Game();
+      var $el = $("#hanoi");
+      var view = new Hanoi.View(game, $el);
+      view.render();
+      view.clickTower();
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,36 @@
+* {
+  font-family: times new roman;
+}
+h1 {
+  font-size: 60px;
+  width: 306px;
+  text-align: center;
+  white-space: nowrap;
+  margin: 100px auto;
+}
+
+#el {
+  width: 306px;
+  margin: 0 auto;
+}
+
+.row {
+  /*width: 150px;*/
+}
+
+.cell {
+  border: 1px solid pink;
+  display: block;
+  width: 60px;
+  height: 60px;
+  padding: 20px;
+  float: left;
+  background-color: grey;
+  font-size: 60px;
+  text-transform: uppercase;
+  padding: 20px;
+}
+
+.cell:hover, .cell.hover {
+  background-color: yellow;
+}
