@@ -1,0 +1,33 @@
+.thumbnails {
+  width: 800px;
+  margin: 0 auto;
+}
+
+.active {
+  width: 100%;
+}
+
+a.nav {
+  text-decoration: none;
+  padding-top: calc((108px - 36px)/2);
+  margin-left: 10px;
+  margin-right: -10px;
+  width: 5%;
+  font-size: 36px;
+  float: left;
+  display: block;
+}
+
+.gutter {
+  display: block;
+}
+.gutter-images {
+  width: 90%;
+  float: left;
+  display: block;
+}
+
+.gutter-images img {
+  display: block;
+  float: left;
+}

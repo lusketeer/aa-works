@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="js/thumbnail.js"></script>
+    <link rel="stylesheet" href="css/style.css" media="screen" title="no title" charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="thumbnails">
+      <div class="active"></div>
+
+      <div class="gutter">
+        <a href="javascript:void(0)" class="nav">&lt;</a>
+        <div class="gutter-images">
+          <img src="http://lorempixel.com/800/600/city/1" alt="" />
+          <img src="http://lorempixel.com/800/600/city/2" alt="" />
+          <img src="http://lorempixel.com/800/600/city/3" alt="" />
+          <img src="http://lorempixel.com/800/600/city/4" alt="" />
+          <img src="http://lorempixel.com/800/600/city/5" alt="" />
+          <img src="http://lorempixel.com/800/600/city/6" alt="" />
+          <img src="http://lorempixel.com/800/600/city/7" alt="" />
+          <img src="http://lorempixel.com/800/600/city/8" alt="" />
+          <img src="http://lorempixel.com/800/600/city/9" alt="" />
+          <img src="http://lorempixel.com/800/600/city/10" alt="" />
+        </div>
+        <a href="javascript:void(0)" class="nav">&gt;</a>
+      </div>
+    </div>
+
+    <script charset="utf-8">
+      $(function(){
+        $('.thumbnails').thumbnails();
+      })
+    </script>
+  </body>
+</html>

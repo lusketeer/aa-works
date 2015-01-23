@@ -1,0 +1,41 @@
+ul.tabs {
+  display: block;
+  width: 400px;
+  margin: 20px auto;
+  height: 30px;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.tabs li {
+  float: left;
+}
+
+.tabs a {
+  text-decoration: none;
+  padding: 20px;
+  font-weight: bold;
+}
+
+div#content-tabs {
+  display: block;
+  width: 400px;
+  margin: 20px auto;
+}
+
+div.tab-pane {
+  display: none;
+}
+
+div.tab-pane.active {
+  transition: opacity 1s;
+  display: block;
+}
+
+.transitioning {
+  transition: opacity 1s;
+  display: block;
+  opacity: 0;
+}

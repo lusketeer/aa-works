@@ -1,0 +1,43 @@
+div.carousel {
+  height: 180px;
+  width: 260px;
+  margin: 0 auto;
+}
+
+div.buttons {
+  z-index: 100;
+  /*margin:*/
+}
+
+div.items {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+img {
+  transition: 0.5s;
+  display: none;
+}
+
+.active {
+  display: block;
+  position: absolute;
+  transition: 0.5s;
+  left: 0;
+}
+
+.left {
+  position: absolute;
+  display: block;
+  left: -100%;
+  top: 0;
+}
+
+.right {
+  position: absolute;
+  display: block;
+  left: 100%;
+  top: 0;
+}
