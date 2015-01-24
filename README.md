@@ -8,7 +8,7 @@
 [chess-game]: ./w2/w2d2-3/chess_game
 
 <!-- JS Stuff Links -->
-[js-games]: https://github.com/lusketeer/js-stff/games
+[js-games]: https://github.com/lusketeer/js-stuff/games
 [js-plugins]: https://github.com/lusketeer/js-stuff/plugins
 
 <!-- Rails Links -->
