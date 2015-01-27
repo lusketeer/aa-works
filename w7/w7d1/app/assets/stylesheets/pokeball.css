@@ -1,0 +1,86 @@
+.pokeball {
+  -webkit-transform: scale(-.4, .4);
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  bottom: -220px;
+  left: 150px;
+  margin: 10% auto;
+  z-index: 9001;
+
+  background: -webkit-radial-gradient(right top, cover circle, rgba(230,230,230,.5)0% , #CA0601 50%) left top no-repeat, -webkit-linear-gradient(90deg, #CCCDD5 40% , #CA0601 40% );
+  background: -moz-radial-gradient(right top, cover circle, rgba(230,230,230,.5)0% , #CA0601 50%) left top no-repeat, -moz-linear-gradient(90deg, #CCCDD5 40% , #CA0601 40% );
+  background: radial-gradient(right top, cover circle, rgba(230,230,230,.5)0% , #CA0601 50%) left top no-repeat, linear-gradient(90deg, #CCCDD5 40% , #CA0601 40% );
+
+  -webkit-background-size: 100% 240px, 100%;
+  -moz-background-size: 100% 240px, 100%;
+  background-size: 100% 240px, 100%;
+  border-radius: 50%;
+  box-shadow: 1px 2px 10px black;
+}
+
+.pokeball:before {
+  position: absolute;
+  content: "";
+  width: 80px;
+  height: 80px;
+  background: #BDBEC5;
+  border-radius: 50%;
+  top: 220px;
+  left: 118px;
+  box-shadow: inset -4px 4px 5px black, 0 0 1px 0 black;
+  z-index: 1;
+}
+
+.pokeball:after {
+  position: absolute;
+  content: "";
+  width: 105px;
+  height: 105px;
+  background: #BDBEC5;
+  border-radius: 50%;
+  top: 205px;
+  left: 110px;
+  box-shadow: inset -5px 5px 5px black, 1px 1px 0 14px black;
+}
+
+.pokeball-details {
+  position: absolute;
+  left: 5px;
+  bottom: 115px;
+  width: 380px;
+  height: 45px;
+  background: black;
+  box-shadow: -3px -2px 0 black, -2px 2px 0 black,3px -2px 0 black;
+  border-bottom-left-radius: 150px 28px;
+  border-bottom-right-radius: 150px 30px;
+
+  -webkit-transform: rotate(5deg);
+  -moz-transform: rotate(5deg);
+  transform: rotate(5deg);
+}
+
+.pokeball-details:before {
+  position: absolute;
+  content: "";
+  left: -4px;
+  bottom: 20px;
+  width: 390px;
+  height: 45px;
+  background: #CA0601;
+  box-shadow: -2px -1px 0 #CA0601;
+  border-bottom-left-radius: 150px 25px;
+  border-bottom-right-radius: 150px 35px;
+}
+
+.pokeball-details:after {
+  position: absolute;
+  content: "";
+  left: -11px;
+  bottom: -115px;
+  width: 400px;
+  height: 400px;
+  background: transparent;
+  box-shadow: 1px 0 0 rgb(232,179,179), inset 2px 0 0 rgba(232,179,179,.8), inset -13px 0 10px rgb(240,230,230);
+  border-radius: 50%;
+}
