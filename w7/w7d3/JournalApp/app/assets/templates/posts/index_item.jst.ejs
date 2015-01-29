@@ -1,0 +1,7 @@
+<a href="#/posts/<%= post.id %>">
+  <%= post.escape("title") %>
+</a>
+<% show = false %>
+<% if (show) { %>
+  <button class="delete" data-id="<%= post.id %>">Delete</button>
+<%  } %>
