@@ -1,0 +1,6 @@
+<a href="<%= entry.escape('link') %>"><%= entry.escape("title") %></a>
+<p>
+  <%= entry.updated_at %>
+</p>
+
+<a href="#/feeds/<%= entry.get('feed_id')%>">Back to Feed</a>
