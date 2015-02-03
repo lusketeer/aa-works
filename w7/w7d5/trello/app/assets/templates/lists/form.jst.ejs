@@ -1,0 +1,11 @@
+<form class="new-list-form">
+  <div class="form-group">
+    <label>
+      Title
+      <input class="form-control" type="text" name="list[title]" value="<%= list.escape('title') %>">
+    </label>
+  </div>
+
+  <button class="submit btn btn-info">New List</button>
+  <button class="cancel list-form btn btn-default">Cancel</button>
+</form>

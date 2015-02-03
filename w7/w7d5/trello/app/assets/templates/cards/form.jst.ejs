@@ -1,0 +1,11 @@
+<form class="new-card-form">
+  <div class="form-group">
+    <label>
+      Title
+      <input class="form-control" type="text" name="card[title]" value="<%= card.escape('title') %>">
+    </label>
+  </div>
+
+  <button class="submit btn btn-info">New Card</button>
+  <button class="cancel card-form btn btn-default">Cancel</button>
+</form>

@@ -1,0 +1,92 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require jquery-ui
+ *= require_tree .
+ */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome";
+
+body {
+  padding-bottom: 50px;
+}
+
+.boards-list {
+  .boards-list-item {
+    float: left;
+    display: block;
+    margin: 0 5px;
+  } // end of .boards-list-item
+} // end of .boards-list
+
+.lists-list {
+  .lists-list-item {
+    float: left;
+    display: block;
+    margin: 5px 5px;
+    background-color: darkgrey;
+    color: black;
+    // transition: 0.5s ease-in-out;
+    border-radius: 12px;
+    min-height: 100px;
+    position: relative;
+    padding-bottom: 20px;
+
+    a.delete {
+      text-decoration: none;
+      color: whitesmoke;
+      display: none;
+    } // end of a.delete
+
+    &:hover {
+      background-color: black;
+      color: whitesmoke;
+      a.delete-list {
+        display: block;
+        position: absolute;
+        top: 5px;
+        right: 10px;
+      } // end of a.delete-list
+
+    } // end of &:hover
+
+    .cards-list {
+      color: black;
+      min-height: 20px;
+      list-style: none;
+      .cards-list-item {
+        background-color: whitesmoke;
+        border-radius: 5px;
+        margin: 10px 10px 10px -30px;
+        min-height: 40px;
+        position: relative;
+        padding: 10px;
+
+        &:hover {
+          background-color: darkgrey;
+          a.delete-card {
+            display: block;
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            color: black;
+          } // end of a.delete-card
+        } // end of &:hover
+      } // end of .cards-list-item
+
+    } // end of .cards-list
+
+    button.new-card {
+      margin-left: 10px;
+    } // end of button.new-card
+  } // end of .lists-list-item
+} // end of .lists-list

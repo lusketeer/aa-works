@@ -1,0 +1,11 @@
+<form>
+  <div class="form-group">
+    <label>
+      Title
+      <input class="form-control" type="text" name="board[title]" value="<%= board.escape('title') %>">
+    </label>
+  </div>
+
+  <button class="submit btn btn-info">New Board</button>
+  <button class="cancel btn btn-default">Cancel</button>
+</form>
